@@ -4,14 +4,13 @@ import json
 app = Flask(__name__)
 
 
-@app.route('/capture-requests/<path:data>', methods=['GET'])
-def capture_requests(data):
-    username = request.args.get('action')
-    
-    if not action:
-        return jsonify({'data': data})
-    
-    return jsonify(data)
+@app.route('/capture-requests/')
+def capture_requests():
+    args = request.query_string.decode()
+    if args:
+        return args
+    else:
+        return "No query parameters were found."
 
 
 @app.route('/process_data/<path:request_data>', methods=['GET'])
