@@ -7,7 +7,6 @@ app = Flask(__name__)
 @app.route('/capture-requests/<path:data>', methods=['GET'])
 def capture_requests(data):
     username = request.args.get('action')
-    password = request.args.get('password')
     
     if not action:
         return jsonify({'data': data})
