@@ -10,13 +10,21 @@ def capture_request(data):
     return jsonify(request_data)
 
 
-@app.route('/json/', methods=['GET', 'POST'])
+@app.route('/process_data', methods=['POST'])
 def process_data():
-    request_data = request.get_json()
-    data = request_data['data']
-    payloads = data['payloads']
-    rewards = payloads[4]['rewards']
-    return jsonify(payloads=payloads, rewards=rewards)
+    data = request.get_json()
+    processed_data = {}
+
+    for item in data:
+        for key, value in item.items():
+            if isinstance(value, dict):
+                for sub_key, sub_value in value.items():
+                    new_key = f"{key}:{sub_key}"
+                    processed_data[new_key] = sub_value
+            else:
+                processed_data[key] = value
+
+    return jsonify(processed_data)
 
 
 if __name__ == '__main__':
