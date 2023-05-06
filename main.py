@@ -4,11 +4,15 @@ import json
 app = Flask(__name__)
 
 
-@app.route('/capture-request/<data>', methods=['GET', 'POST'])
-def capture_request(data):
-    request_data = data
-    print(request_data)
-    return jsonify(request_data)
+@app.route('/capture-requests/<path:data>', methods=['GET'])
+def capture_requests(data):
+    username = request.args.get('action')
+    password = request.args.get('password')
+    
+    if not action:
+        return jsonify({'data': data})
+    
+    return jsonify(data)
 
 
 @app.route('/process_data/<path:request_data>', methods=['GET'])
