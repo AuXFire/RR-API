@@ -1,10 +1,10 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 import json
 
 app = Flask(__name__)
 
 
-@app.route('/capture-request/')
+@app.route('/capture-requests/', methods=['GET', 'POST'])
 def capture_requests():
     args = request.query_string.decode()
     if args:
