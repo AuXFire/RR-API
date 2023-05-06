@@ -10,5 +10,14 @@ def capture_request(data):
     return jsonify(request_data)
 
 
+@app.route('/json/', methods=['GET', 'POST'])
+def process_data():
+    request_data = request.get_json()
+    data = request_data['data']
+    payloads = data['payloads']
+    rewards = payloads[4]['rewards']
+    return jsonify(payloads=payloads, rewards=rewards)
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=10000)
