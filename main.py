@@ -10,9 +10,9 @@ def capture_request(data):
     return jsonify(request_data)
 
 
-@app.route('/process_data', methods=['POST'])
-def process_data():
-    data = request.get_json()
+@app.route('/process_data/<path:request_data>', methods=['GET'])
+def process_data(request_data):
+    data = json.loads(request_data)
     processed_data = {}
 
     for item in data:
@@ -25,6 +25,7 @@ def process_data():
                 processed_data[key] = value
 
     return jsonify(processed_data)
+
 
 
 if __name__ == '__main__':
