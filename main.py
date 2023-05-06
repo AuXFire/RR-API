@@ -4,7 +4,7 @@ import json
 app = Flask(__name__)
 
 
-@app.route('/capture-requests/', methods=['GET', 'POST'])
+@app.route('/capture-request/', methods=['GET', 'POST'])
 def capture_requests():
     args = request.query_string.decode()
     if args:
